@@ -27,17 +27,28 @@ function App() {
 
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+  const [contactSelected, setContactSelected] = useState(false); // false prevents contact form showing right away
+
   return (
     <div>
       <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelevted={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
+        {/* equivalent statement (:), if contactSelected is false, render Gallery and About */}
+        {/* if true, render ContactForm */}
+        {!contactSelected ? (
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
           <ContactForm></ContactForm>
-          <Gallery currentCategory={currentCategory}></Gallery>
-          <About></About>
+        )}
       </main>
     </div>
   );
